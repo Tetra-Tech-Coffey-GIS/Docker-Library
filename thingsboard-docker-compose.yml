@@ -1,0 +1,56 @@
+version: '3.0'
+services:
+  mytb:
+    image: "thingsboard/tb-postgres"
+    networks:
+      - dev_net
+    ports:
+      - "8080:9090"
+      - "1884:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: rabbitmq
+      TB_QUEUE_RABBIT_MQ_USERNAME: test
+      TB_QUEUE_RABBIT_MQ_PASSWORD: test123369
+      TB_QUEUE_RABBIT_MQ_HOST: rabbitmq
+      TB_QUEUE_RABBIT_MQ_PORT: 5672
+    depends_on:
+      - rabbitmq
+    volumes:
+      - mytb-data:/data
+      - mytb-logs:/var/log/thingsboard
+  rabbitmq:
+    image: rabbitmq:3-management
+    networks:
+      - dev_net
+    environment:
+      # RABBITMQ_ERLANG_COOKIE: 'asdfjasifasjfawfjisfjasifjioasjfoiasj'
+      RABBITMQ_DEFAULT_USER: test
+      RABBITMQ_DEFAULT_PASS: test123369
+    volumes:
+     - C:\Dev\ThingsBoard\rmq-test\db-data:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+  tb-gateway:
+    image: "thingsboard/tb-gateway"
+    # Ports (Required for REST connector)
+    networks:
+      - dev_net
+    ports:
+      - "5000:5000"
+    depends_on:
+     - mytb
+    volumes:
+      - C:\Dev\ThingsBoard\tb-gateway\config:/thingsboard_gateway/config
+      - C:\Dev\ThingsBoard\tb-gateway\logs:/thingsboard_gateway/logs
+      - C:\Dev\ThingsBoard\tb-gateway\extensions:/thingsboard_gateway/extensions
+volumes:
+  mytb-data:
+    external: true
+  mytb-logs:
+    external: true
+networks:
+  dev_net:
+    name: dev_net

@@ -1,0 +1,16 @@
+version: '3'
+
+services:   
+  emqx:
+    image: emqx:latest
+    ports:
+      - 18083:18083
+      - 1883:1883
+    environment:
+      EMQX_NAME: dev_emqx
+    networks:
+      - dev_net
+
+networks:
+  dev_net:
+    name: dev_net
