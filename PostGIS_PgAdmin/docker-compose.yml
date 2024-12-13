@@ -1,0 +1,28 @@
+
+services:
+  db:
+    image: postgis/postgis
+    container_name: local_pisgdb
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgis
+      POSTGRES_PASSWORD: example
+    volumes:
+      - local_pgisdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgisadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: example
+    volumes:
+      - pgisadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_pgisdata:
+  pgisadmin-data:
