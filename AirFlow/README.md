@@ -1,8 +1,6 @@
-pip install airflow-code-editor
+Use this command to run.
 
-pip install black isort fs-s3fs fs-gcsfs
-
-docker compose up flower
+docker compose --profile flower up
 
 # Airflow Docker
 
