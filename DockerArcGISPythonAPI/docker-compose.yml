@@ -1,0 +1,11 @@
+services:
+  jupyter_lab:
+    image: ghcr.io/esri/arcgis-python-api-notebook
+    container_name: arcgis-python-api-notebook
+    restart: always
+    volumes:
+      - .:/home/jovyan/work
+#      - ./configure_environment.sh:/usr/local/bin/before-notebook.d/configure_environment.sh
+    ports:
+      - 8888:8888
+    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
