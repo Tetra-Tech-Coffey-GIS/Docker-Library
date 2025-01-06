@@ -1,3 +1,9 @@
+pip install airflow-code-editor
+
+pip install black isort fs-s3fs fs-gcsfs
+
+docker compose up flower
+
 # Airflow Docker
 
 ## Before you begin
@@ -129,3 +135,5 @@ Run through this guide from the very beginning, starting by re-downloading the d
 Now you can start all services:
 
 docker compose up
+
+
