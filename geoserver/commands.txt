@@ -1,0 +1,12 @@
+docker pull docker.osgeo.org/geoserver:2.27.0
+
+docker run -it -p 80:8080 docker.osgeo.org/geoserver:2.27.0
+
+
+Check http://localhost/geoserver to see the geoserver page, and login with geoserver default admin:geoserver credentials.
+
+
+https://build.geoserver.org/geoserver/2.27.x/ext-latest/geoserver-2.27-SNAPSHOT-sqlserver-plugin.zip
+
+
+unzip -d /usr/local/tomcat/webapps/geoserver/WEB-INF/lib geoserver-2.27-SNAPSHOT-sqlserver-plugin.zip
